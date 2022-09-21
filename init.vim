@@ -33,6 +33,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 " Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'folke/trouble.nvim'
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 call plug#end()
 
 set rtp+=~/.config/nvim/bundle/Vundle.vim
@@ -65,5 +68,8 @@ let g:airline_theme='base16'
 
 " makes background transparent
 " hi Normal guibg=NONE ctermbg=NONE
+
+" auto close if NvimTree last window
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 
 lua require("corey-collins")
