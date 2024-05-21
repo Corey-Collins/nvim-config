@@ -11,6 +11,7 @@ let g:rustfmt_autosave = 1
 set termguicolors
 set scrolloff=8
 set updatetime=50
+set noswapfile
 " set guicursor=
 " set signcolumn=number
 
