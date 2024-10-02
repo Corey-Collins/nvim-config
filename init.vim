@@ -1,4 +1,6 @@
-set tabstop=4
+set tabstop=4								" num visual spaces per tab
+set shiftwidth=4							" num visual spaces used for each step of (auto)indent
+set expandtab								" convert tab to spaces
 set nowrap
 set backspace=indent,eol,start
 set number relativenumber
@@ -7,11 +9,14 @@ set hidden
 set wildmenu
 set wildignore+=**/node_modules/**
 set path+=**
-let g:rustfmt_autosave = 1
 set termguicolors
 set scrolloff=8
 set updatetime=50
 set noswapfile
+set clipboard=unnamedplus
+let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python' " make sure include venv here with pynvim and black installed
+let g:rustfmt_autosave = 1
+autocmd BufWritePre *.py execute ':Black'
 " set guicursor=
 " set signcolumn=number
 
@@ -37,6 +42,7 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
 call plug#end()
 
 set rtp+=~/.config/nvim/bundle/Vundle.vim

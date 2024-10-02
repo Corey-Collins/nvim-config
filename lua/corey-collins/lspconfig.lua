@@ -1,6 +1,7 @@
 local nvim_lsp = require('lspconfig')
--- local servers = { 'rust_analyzer' }
-local servers = {  }
+
+local servers = { 'rust_analyzer', 'pyright' }
+
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -22,17 +23,20 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 end
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 for _, lsp in ipairs(servers) do
-		nvim_lsp[lsp].setup{
-				on_attach = on_attach
-		}
+  nvim_lsp[lsp].setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
 end
 
--- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
--- require('lspconfig')['rust_analyzer'].setup {
---   capabilities = capabilities
+-- nvim_lsp['rust_analyzer'].setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
 -- }
+
