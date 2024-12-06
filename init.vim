@@ -12,11 +12,10 @@ set path+=**
 set termguicolors
 set scrolloff=8
 set updatetime=50
-set noswapfile
 set clipboard=unnamedplus
 let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python' " make sure include venv here with pynvim and black installed
 let g:rustfmt_autosave = 1
-autocmd BufWritePre *.py execute ':Black'
+" autocmd BufWritePre *.py execute ':Black'
 " set guicursor=
 " set signcolumn=number
 
@@ -43,6 +42,7 @@ Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'tpope/vim-surround'
 
 " Debugger
 Plug 'mfussenegger/nvim-dap'
@@ -50,7 +50,6 @@ Plug 'nvim-neotest/nvim-nio'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'mrcjkb/rustaceanvim'
-
 call plug#end()
 
 set rtp+=~/.config/nvim/bundle/Vundle.vim
