@@ -1,6 +1,7 @@
 local nvim_lsp = require('lspconfig')
 
-local servers = { 'rust_analyzer', 'pyright' }
+-- local servers = { 'rust_analyzer', 'pyright' }
+local servers = { 'pyright' }
 
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
@@ -34,9 +35,4 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
-
--- nvim_lsp['rust_analyzer'].setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
 

@@ -42,3 +42,8 @@ keymap("n", "<leader>o", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>p", "<cmd>Telescope live_grep<cr>", opts)
 -- NvimTree
 keymap("n", "<leader>e", "<cmd>:NvimTreeToggle<cr>", opts)
+-- Debugger
+keymap("n", "<leader>dt", "<cmd>lua require'dapui'.toggle()<cr>", opts)
+keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
+keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
+keymap("n", "<leader>dr", "<cmd>lua require('dapui').close(); require('dapui').setup(); require('dapui').open()<cr>", opts)

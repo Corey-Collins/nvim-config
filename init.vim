@@ -43,6 +43,14 @@ Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+
+" Debugger
+Plug 'mfussenegger/nvim-dap'
+Plug 'nvim-neotest/nvim-nio'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'mrcjkb/rustaceanvim'
+
 call plug#end()
 
 set rtp+=~/.config/nvim/bundle/Vundle.vim
