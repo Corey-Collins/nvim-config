@@ -1,7 +1,6 @@
 local nvim_lsp = require('lspconfig')
 
--- local servers = { 'rust_analyzer', 'pyright' }
-local servers = { 'pyright' }
+local servers = { 'pyright', 'tailwindcss', 'ts_ls', 'jsonls', 'eslint'}
 
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
