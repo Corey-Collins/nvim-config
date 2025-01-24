@@ -1,6 +1,7 @@
 require('corey-collins.lspconfig')
 require('corey-collins.treesitter')
 require('corey-collins.nvimcmp')
+require('corey-collins.autopairs')
 -- require('corey-collins.trouble')
 require('corey-collins.dapui')
 require('corey-collins.rustaceanvim')

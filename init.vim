@@ -1,6 +1,9 @@
 set tabstop=4								" num visual spaces per tab
 set shiftwidth=4							" num visual spaces used for each step of (auto)indent
 set expandtab								" convert tab to spaces
+set autoindent
+set smartindent
+autocmd FileType html,vue setlocal shiftwidth=2 softtabstop=2
 set nowrap
 set backspace=indent,eol,start
 set number relativenumber
@@ -43,6 +46,11 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'tpope/vim-surround'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-ts-autotag'
+Plug 'luckasRanarison/tailwind-tools.nvim'
+Plug 'onsails/lspkind-nvim'
 
 " Debugger
 Plug 'mfussenegger/nvim-dap'
@@ -57,8 +65,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Add plugins here
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-commentary'
+"Plugin 'jiangmiao/auto-pairs'
+" Plugin 'tpope/vim-commentary'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 

@@ -13,5 +13,16 @@ configs.setup({
 	autopairs = {
 		enable = true,
 	},
-	indent = { enable = true, disable = { "python", "css" } },
+	-- indent = { enable = true, disable = { "python", "css" } },
+	indent = { enable = true },
+    context_commentstring = {
+      enable = true,
+      enable_autocmd = false,
+    },
 })
+
+-- Disable deprecated Treesitter module for commentstring
+vim.g.skip_ts_context_commentstring_module = true
+
+-- Proper setup for ts_context_commentstring
+require('ts_context_commentstring').setup {}

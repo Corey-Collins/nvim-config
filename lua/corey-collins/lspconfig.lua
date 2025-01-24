@@ -1,6 +1,9 @@
 local nvim_lsp = require('lspconfig')
 
-local servers = { 'pyright', 'tailwindcss', 'ts_ls', 'jsonls', 'eslint'}
+require("tailwind-tools").setup()
+
+local servers = { 'pyright', 'tailwindcss', 'jsonls', 'volar' }
+-- local servers = { 'pyright', 'tailwindcss', 'ts_ls', 'jsonls', 'eslint', 'volar' }
 
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
@@ -35,3 +38,12 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- nvim_lsp.tailwindcss.setup({
+--   settings = {
+--     tailwindCSS = {
+--       experimental = {
+--         classNameColors = true, -- Enable class color previews
+--       },
+--     },
+--   },
+-- })
