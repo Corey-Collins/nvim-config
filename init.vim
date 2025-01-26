@@ -3,8 +3,10 @@ set shiftwidth=4							" num visual spaces used for each step of (auto)indent
 set expandtab								" convert tab to spaces
 set autoindent
 set smartindent
-autocmd FileType html,vue setlocal shiftwidth=2 softtabstop=2
+autocmd FileType html,vue,css setlocal shiftwidth=2 softtabstop=2
 set nowrap
+set iskeyword+=- " let you delete words (diw) with symbols like-this
+set iskeyword+=\:
 set backspace=indent,eol,start
 set number relativenumber
 set cursorline

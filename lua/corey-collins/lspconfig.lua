@@ -2,7 +2,7 @@ local nvim_lsp = require('lspconfig')
 
 require("tailwind-tools").setup()
 
-local servers = { 'pyright', 'tailwindcss', 'jsonls', 'volar' }
+local servers = { 'pyright', 'tailwindcss', 'jsonls', 'volar', 'eslint' }
 -- local servers = { 'pyright', 'tailwindcss', 'ts_ls', 'jsonls', 'eslint', 'volar' }
 
 local on_attach = function(client, bufnr)
