@@ -1,3 +1,5 @@
+local cc = require("corey-collins.codecompanion")
+
 local opts = { noremap = true, silent = true }
 
 local term_opts = { silent = true }
@@ -47,5 +49,11 @@ keymap("n", "<leader>dt", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
 keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
 keymap("n", "<leader>dr", "<cmd>lua require('dapui').close(); require('dapui').setup(); require('dapui').open()<cr>", opts)
+-- CodeCompanion
+vim.keymap.set("n", "<leader>cc", ":CodeCompanionChat<CR>", { desc = "Start CodeCompanion Chat" })
+vim.keymap.set("n", "<leader>cr", ":CodeCompanionChat #last<CR>", { desc = "Reopen last CodeCompanion chat" })
+vim.keymap.set("v", "<leader>cc", ":CodeCompanionChat<CR>", { desc = "Start Chat with Selection" })
+vim.keymap.set("v", "<leader>cr", ":CodeCompanionChat #last<CR>", { desc = "Reopen last CodeCompanion chat with selection" })
+vim.keymap.set("n", "<leader>ct", cc.toggle_chat, { desc = "Toggle CodeCompanion Chat" })
 -- Commenting with nvim-ts-context-commentstring
 -- keymap("n", "gcc", "<cmd>lua require('ts_context_commentstring.internal').update_commentstring()<CR>gcc", opts)
