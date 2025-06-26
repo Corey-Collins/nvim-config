@@ -1,8 +1,22 @@
 local nvim_lsp = require('lspconfig')
+local configs = require("lspconfig.configs")
+
+-- Setup tabby-agent as a new language server
+if not configs.tabby then
+  configs.tabby = {
+    default_config = {
+      name = "tabby",
+      cmd = { "tabby-agent", "--stdio" },
+      filetypes = { "python", "javascript", "typescript", "lua", "go", "rust", "html", "css" },
+      root_dir = require("lspconfig.util").root_pattern(".git", vim.fn.getcwd()),
+      single_file_support = true,
+    },
+  }
+end
 
 require("tailwind-tools").setup()
 
-local servers = { 'pyright', 'tailwindcss', 'jsonls', 'ts_ls', 'eslint', 'volar', 'eslint' }
+local servers = { 'pyright', 'tailwindcss', 'eslint', 'ts_ls', 'jsonls', 'volar', 'eslint', 'tabby' }
 -- local servers = { 'pyright', 'tailwindcss', 'ts_ls', 'jsonls', 'eslint', 'volar' }
 
 local on_attach = function(client, bufnr)
@@ -37,6 +51,25 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+local configs = require("lspconfig.configs")
+
+if not configs.tabby then
+  configs.tabby = {
+    default_config = {
+      name = "tabby",
+      cmd = { "tabby-agent", "--stdio" },
+      filetypes = { "python", "javascript", "typescript", "lua", "go", "rust", "html", "css" },
+      root_dir = require("lspconfig.util").root_pattern(".git", vim.fn.getcwd()),
+      single_file_support = true,
+    },
+  }
+end
+
+nvim_lsp.tabby.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
 
 -- nvim_lsp.tailwindcss.setup({
 --   settings = {

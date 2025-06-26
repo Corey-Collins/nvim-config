@@ -4,6 +4,7 @@ set expandtab								" convert tab to spaces
 set autoindent
 set smartindent
 autocmd FileType html,vue,css setlocal shiftwidth=2 softtabstop=2
+autocmd FileType terraform setlocal shiftwidth=2 softtabstop=2 tabstop=2
 set nowrap
 set iskeyword+=- " let you delete words (diw) with symbols like-this
 "set iskeyword+=\:
@@ -21,6 +22,7 @@ set clipboard=unnamedplus
 let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python' " make sure include venv here with pynvim and black installed
 let g:rustfmt_autosave = 1
 " autocmd BufWritePre *.py execute ':Black'
+autocmd BufWritePost *.tf,*.tfvars silent! execute ':!terraform fmt %' | e!
 " set guicursor=
 " set signcolumn=number
 
@@ -30,6 +32,7 @@ Plug 'MeanderingProgrammer/markdown.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 " Plug 'wellle/context.vim'
+Plug 'nanozuki/tabby.nvim'
 Plug 'rust-lang/rust.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'prabirshrestha/vim-lsp'
