@@ -129,6 +129,9 @@ dap.configurations.rust = {
     cwd = "${workspaceFolder}",
     stopOnEntry = false,
     args = {}, -- Arguments to pass to the program being debugged
+    preLaunchTask = function()
+      vim.cmd('!cargo build -p chain')
+    end,
   },
 }
 

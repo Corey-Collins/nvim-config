@@ -6,7 +6,7 @@ set smartindent
 autocmd FileType html,vue,css setlocal shiftwidth=2 softtabstop=2
 set nowrap
 set iskeyword+=- " let you delete words (diw) with symbols like-this
-set iskeyword+=\:
+"set iskeyword+=\:
 set backspace=indent,eol,start
 set number relativenumber
 set cursorline
@@ -26,6 +26,7 @@ let g:rustfmt_autosave = 1
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'EdenEast/nightfox.nvim'
+Plug 'MeanderingProgrammer/markdown.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 " Plug 'wellle/context.vim'
@@ -53,6 +54,8 @@ Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'luckasRanarison/tailwind-tools.nvim'
 Plug 'onsails/lspkind-nvim'
+
+Plug 'olimorris/codecompanion.nvim'
 
 " Debugger
 Plug 'mfussenegger/nvim-dap'
