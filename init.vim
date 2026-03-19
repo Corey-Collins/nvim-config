@@ -28,11 +28,10 @@ autocmd BufWritePost *.tf,*.tfvars silent! execute ':!terraform fmt %' | e!
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'EdenEast/nightfox.nvim'
-Plug 'MeanderingProgrammer/markdown.nvim'
+"Plug 'MeanderingProgrammer/markdown.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 " Plug 'wellle/context.vim'
-Plug 'nanozuki/tabby.nvim'
 Plug 'rust-lang/rust.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'prabirshrestha/vim-lsp'
@@ -45,7 +44,6 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
-" Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'folke/trouble.nvim'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'kyazdani42/nvim-web-devicons'
@@ -57,8 +55,18 @@ Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'luckasRanarison/tailwind-tools.nvim'
 Plug 'onsails/lspkind-nvim'
+Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 
-Plug 'olimorris/codecompanion.nvim'
+"Plug 'olimorris/codecompanion.nvim'
+
+" Avante
+Plug 'MunifTanjim/nui.nvim'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+Plug 'HakonHarnes/img-clip.nvim'
+Plug 'stevearc/dressing.nvim' " for enhanced input UI
+Plug 'folke/snacks.nvim' " for modern input UI
+Plug 'zbirenbaum/copilot.lua'
+Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
 
 " Debugger
 Plug 'mfussenegger/nvim-dap'

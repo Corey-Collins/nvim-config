@@ -1,5 +1,17 @@
 local nvim_lsp = require('lspconfig')
 local configs = require("lspconfig.configs")
+local util = require("lspconfig.util")
+
+vim.diagnostic.config({
+  virtual_text = {
+    -- prefix = "●",  -- or ">>", customize as you prefer
+    spacing = 2,
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
 
 -- Setup tabby-agent as a new language server
 if not configs.tabby then
@@ -8,7 +20,7 @@ if not configs.tabby then
       name = "tabby",
       cmd = { "tabby-agent", "--stdio" },
       filetypes = { "python", "javascript", "typescript", "lua", "go", "rust", "html", "css" },
-      root_dir = require("lspconfig.util").root_pattern(".git", vim.fn.getcwd()),
+      root_dir = util.root_pattern(".git", vim.fn.getcwd()),
       single_file_support = true,
     },
   }
@@ -16,8 +28,17 @@ end
 
 require("tailwind-tools").setup()
 
-local servers = { 'pyright', 'tailwindcss', 'eslint', 'ts_ls', 'jsonls', 'volar', 'eslint', 'tabby' }
--- local servers = { 'pyright', 'tailwindcss', 'ts_ls', 'jsonls', 'eslint', 'volar' }
+-- Helper to detect env path
+local function get_python_path(root_dir)
+  local env_python = root_dir .. "/env/bin/python"
+  if vim.fn.filereadable(env_python) == 1 then
+    return env_python
+  else
+    return nil
+  end
+end
+
+local servers = { 'pyright', 'tailwindcss', 'eslint', 'ts_ls', 'jsonls', 'volar' }
 
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
@@ -45,6 +66,20 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+local function find_venv(start_dir)
+  local dir = vim.fn.fnamemodify(start_dir, ":p") -- absolute path
+  while dir and dir ~= "/" do
+    local candidate = vim.fs.joinpath(dir, "env", "bin", "python")
+    print("Checking for:", candidate) -- debugging
+    if vim.fn.filereadable(candidate) == 1 then
+      print("Found venv at:", candidate)
+      return candidate
+    end
+    dir = vim.fn.fnamemodify(dir, ":h")
+  end
+  return nil
+end
+
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup{
     on_attach = on_attach,
@@ -60,7 +95,7 @@ if not configs.tabby then
       name = "tabby",
       cmd = { "tabby-agent", "--stdio" },
       filetypes = { "python", "javascript", "typescript", "lua", "go", "rust", "html", "css" },
-      root_dir = require("lspconfig.util").root_pattern(".git", vim.fn.getcwd()),
+      root_dir = util.root_pattern(".git", vim.fn.getcwd()),
       single_file_support = true,
     },
   }
