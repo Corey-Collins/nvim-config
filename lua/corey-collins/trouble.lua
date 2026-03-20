@@ -1,5 +1,6 @@
--- require("trouble").setup {
---     -- your configuration comes here
---     -- or leave it empty to use the default settings
---     -- refer to the configuration section below
--- }
+-- Trouble is now configured in lazy.lua
+-- Keybindings:
+--   <leader>xx - Toggle diagnostics
+--   <leader>xX - Toggle buffer diagnostics
+--   <leader>cs - Toggle symbols
+--   <leader>cl - Toggle LSP references

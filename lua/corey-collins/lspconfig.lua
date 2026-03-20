@@ -1,7 +1,3 @@
-local nvim_lsp = require('lspconfig')
-local configs = require("lspconfig.configs")
-local util = require("lspconfig.util")
-
 vim.diagnostic.config({
   virtual_text = {
     -- prefix = "●",  -- or ">>", customize as you prefer
@@ -13,33 +9,7 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
--- Setup tabby-agent as a new language server
-if not configs.tabby then
-  configs.tabby = {
-    default_config = {
-      name = "tabby",
-      cmd = { "tabby-agent", "--stdio" },
-      filetypes = { "python", "javascript", "typescript", "lua", "go", "rust", "html", "css" },
-      root_dir = util.root_pattern(".git", vim.fn.getcwd()),
-      single_file_support = true,
-    },
-  }
-end
-
-require("tailwind-tools").setup()
-
--- Helper to detect env path
-local function get_python_path(root_dir)
-  local env_python = root_dir .. "/env/bin/python"
-  if vim.fn.filereadable(env_python) == 1 then
-    return env_python
-  else
-    return nil
-  end
-end
-
-local servers = { 'pyright', 'tailwindcss', 'eslint', 'ts_ls', 'jsonls', 'volar' }
-
+-- Common on_attach function
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -66,52 +36,39 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local function find_venv(start_dir)
-  local dir = vim.fn.fnamemodify(start_dir, ":p") -- absolute path
-  while dir and dir ~= "/" do
-    local candidate = vim.fs.joinpath(dir, "env", "bin", "python")
-    print("Checking for:", candidate) -- debugging
-    if vim.fn.filereadable(candidate) == 1 then
-      print("Found venv at:", candidate)
-      return candidate
-    end
-    dir = vim.fn.fnamemodify(dir, ":h")
-  end
-  return nil
-end
-
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup{
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-end
-
-local configs = require("lspconfig.configs")
-
-if not configs.tabby then
-  configs.tabby = {
-    default_config = {
-      name = "tabby",
-      cmd = { "tabby-agent", "--stdio" },
-      filetypes = { "python", "javascript", "typescript", "lua", "go", "rust", "html", "css" },
-      root_dir = util.root_pattern(".git", vim.fn.getcwd()),
-      single_file_support = true,
-    },
-  }
-end
-
-nvim_lsp.tabby.setup({
+-- Configure LSP servers using new vim.lsp.config API
+vim.lsp.config('pyright', {
   on_attach = on_attach,
   capabilities = capabilities,
 })
 
--- nvim_lsp.tailwindcss.setup({
---   settings = {
---     tailwindCSS = {
---       experimental = {
---         classNameColors = true, -- Enable class color previews
---       },
---     },
---   },
--- })
+vim.lsp.config('eslint', {
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+vim.lsp.config('ts_ls', {
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+vim.lsp.config('jsonls', {
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+vim.lsp.config('volar', {
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+-- Setup custom tabby-agent language server
+vim.lsp.config('tabby', {
+  cmd = { "tabby-agent", "--stdio" },
+  filetypes = { "python", "javascript", "typescript", "lua", "go", "rust", "html", "css" },
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+-- Enable all configured servers
+vim.lsp.enable({ 'pyright', 'eslint', 'ts_ls', 'jsonls', 'volar', 'tabby' })

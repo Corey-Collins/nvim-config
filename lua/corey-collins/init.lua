@@ -1,13 +1,15 @@
-require('corey-collins.lspconfig')
+-- lazy.nvim is bootstrapped in init.vim before vim-plug loads
+-- Plugin configurations (loaded after both lazy.nvim and vim-plug load plugins)
+-- lspconfig configured in lazy.nvim
 require('corey-collins.markdown')
-require('corey-collins.treesitter')
-require('corey-collins.nvimcmp')
-require('corey-collins.autopairs')
+-- treesitter configured in lazy.nvim
+-- nvimcmp configured in lazy.nvim
+-- autopairs configured in lazy.nvim
 -- require('corey-collins.trouble')
-require('corey-collins.dapui')
+-- dapui configured in lazy.nvim
 require('corey-collins.rustaceanvim')
-require('corey-collins.toggleterm')
-require('corey-collins.nvimtree')
+-- toggleterm configured in lazy.nvim
+-- nvimtree configured in lazy.nvim
 require('corey-collins.virtualtext')
 require('corey-collins.keymaps')
-require('corey-collins.avante')
+-- avante configured in lazy.nvim

@@ -26,67 +26,10 @@ autocmd BufWritePost *.tf,*.tfvars silent! execute ':!terraform fmt %' | e!
 " set guicursor=
 " set signcolumn=number
 
-call plug#begin('~/.config/nvim/plugged')
-Plug 'EdenEast/nightfox.nvim'
-"Plug 'MeanderingProgrammer/markdown.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-context'
-" Plug 'wellle/context.vim'
-Plug 'rust-lang/rust.vim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
-" Plug 'folke/trouble.nvim'
-Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'tpope/vim-surround'
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-Plug 'windwp/nvim-autopairs'
-Plug 'windwp/nvim-ts-autotag'
-Plug 'luckasRanarison/tailwind-tools.nvim'
-Plug 'onsails/lspkind-nvim'
-Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
+" Bootstrap lazy.nvim early so plugins are available
+lua require('corey-collins.lazy')
 
-"Plug 'olimorris/codecompanion.nvim'
-
-" Avante
-Plug 'MunifTanjim/nui.nvim'
-Plug 'MeanderingProgrammer/render-markdown.nvim'
-Plug 'HakonHarnes/img-clip.nvim'
-Plug 'stevearc/dressing.nvim' " for enhanced input UI
-Plug 'folke/snacks.nvim' " for modern input UI
-Plug 'zbirenbaum/copilot.lua'
-Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
-
-" Debugger
-Plug 'mfussenegger/nvim-dap'
-Plug 'nvim-neotest/nvim-nio'
-Plug 'rcarriga/nvim-dap-ui'
-Plug 'theHamsta/nvim-dap-virtual-text'
-Plug 'mrcjkb/rustaceanvim'
-call plug#end()
-
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-
-" Add plugins here
-"Plugin 'jiangmiao/auto-pairs'
-" Plugin 'tpope/vim-commentary'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
-call vundle#end()
+" All plugins now managed by lazy.nvim!
 
 filetype plugin indent on
 
@@ -100,9 +43,6 @@ hi clear CursorLine
 augroup CLClear
     autocmd! ColorScheme * hi clear CursorLine
 augroup END
-
-" airline theme
-let g:airline_theme='base16'
 
 " makes background transparent
 " hi Normal guibg=NONE ctermbg=NONE
