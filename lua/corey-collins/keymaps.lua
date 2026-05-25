@@ -27,11 +27,8 @@ vim.g.maplocalleader = " "
 keymap("n", "<C-b>", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<A-l>", ":bnext<CR>", opts)
 keymap("n", "<A-h>", ":bprevious<CR>", opts)
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- Window navigation handled by vim-tmux-navigator plugin
+-- Uses <C-h/j/k/l> to navigate Neovim splits and tmux panes seamlessly
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
@@ -49,3 +46,40 @@ keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
 keymap("n", "<leader>dr", "<cmd>lua require('dapui').close(); require('dapui').setup(); require('dapui').open()<cr>", opts)
 -- Commenting with nvim-ts-context-commentstring
 -- keymap("n", "gcc", "<cmd>lua require('ts_context_commentstring.internal').update_commentstring()<CR>gcc", opts)
+
+-- Diffview (git diff viewer) - toggle on <leader>gd
+local function toggle_diffview()
+  local lib = require("diffview.lib")
+  local view = lib.get_current_view()
+
+  if view then
+    -- Diffview is open in current tab, close it
+    vim.cmd("DiffviewClose")
+  else
+    -- Check if diffview is open in any other tab by looking for DiffviewFiles filetype
+    local diffview_tabpage = nil
+    for i = 1, vim.fn.tabpagenr("$") do
+      local tabnr_wins = vim.fn.tabpagewinnr(i, "$")
+      for j = 1, tabnr_wins do
+        local winid = vim.fn.win_getid(j, i)
+        local bufnr = vim.fn.winbufnr(winid)
+        local filetype = vim.fn.getbufvar(bufnr, "&filetype")
+        if filetype == "DiffviewFiles" then
+          diffview_tabpage = i
+          break
+        end
+      end
+      if diffview_tabpage then break end
+    end
+
+    if diffview_tabpage then
+      -- Switch to the tab with diffview open
+      vim.cmd("tabnext " .. diffview_tabpage)
+    else
+      -- Open diffview in current tab
+      vim.cmd("DiffviewOpen")
+    end
+  end
+end
+
+vim.keymap.set("n", "<leader>gd", toggle_diffview, opts)

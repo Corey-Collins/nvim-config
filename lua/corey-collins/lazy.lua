@@ -155,7 +155,11 @@ require("lazy").setup({
     lazy = true,
   },
 
-  -- Group 4: Navigation (telescope, nvim-tree, trouble)
+  -- Group 4: Navigation (telescope, nvim-tree, trouble, vim-tmux-navigator)
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
   {
     "folke/trouble.nvim",
     opts = {},
@@ -223,53 +227,20 @@ require("lazy").setup({
     lazy = true,
   },
 
-  -- Group 7: AI tools (avante & dependencies)
-  {
-    "yetone/avante.nvim",
-    branch = "main",
-    build = "make",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "zbirenbaum/copilot.lua",
-      "MeanderingProgrammer/render-markdown.nvim",
-      "HakonHarnes/img-clip.nvim",
-      "folke/snacks.nvim",
-    },
-    config = function()
-      require('corey-collins.avante')
-    end,
-  },
-  {
-    "MunifTanjim/nui.nvim",
-    lazy = true,
-  },
+  -- Markdown rendering
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    lazy = true,
-  },
-  {
-    "HakonHarnes/img-clip.nvim",
-    lazy = true,
-  },
-  {
-    "stevearc/dressing.nvim",
-    lazy = true,
-  },
-  {
-    "folke/snacks.nvim",
-    lazy = true,
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
+    ft = { "markdown", "codecompanion" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     config = function()
-      require('copilot').setup()
+      require('corey-collins.markdown')
     end,
+  },
+
+  -- Git diff viewer
+  {
+    "sindrets/diffview.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
   -- Group 8: Remaining plugins

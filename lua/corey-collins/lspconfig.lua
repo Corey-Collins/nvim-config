@@ -50,6 +50,16 @@ vim.lsp.config('eslint', {
 vim.lsp.config('ts_ls', {
   on_attach = on_attach,
   capabilities = capabilities,
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  init_options = {
+    plugins = {
+      {
+        name = '@vue/typescript-plugin',
+        location = vim.fn.stdpath('data') .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+        languages = { 'vue' }
+      }
+    }
+  }
 })
 
 vim.lsp.config('jsonls', {
@@ -57,7 +67,7 @@ vim.lsp.config('jsonls', {
   capabilities = capabilities,
 })
 
-vim.lsp.config('volar', {
+vim.lsp.config('vue_ls', {
   on_attach = on_attach,
   capabilities = capabilities,
 })
@@ -71,4 +81,4 @@ vim.lsp.config('tabby', {
 })
 
 -- Enable all configured servers
-vim.lsp.enable({ 'pyright', 'eslint', 'ts_ls', 'jsonls', 'volar', 'tabby' })
+vim.lsp.enable({ 'pyright', 'eslint', 'ts_ls', 'jsonls', 'vue_ls', 'tabby' })

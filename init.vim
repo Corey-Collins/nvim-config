@@ -4,6 +4,7 @@ set expandtab								" convert tab to spaces
 set autoindent
 set smartindent
 autocmd FileType html,vue,css setlocal shiftwidth=2 softtabstop=2
+autocmd FileType json setlocal shiftwidth=2 softtabstop=2 tabstop=2
 autocmd FileType terraform setlocal shiftwidth=2 softtabstop=2 tabstop=2
 set nowrap
 set iskeyword+=- " let you delete words (diw) with symbols like-this

@@ -58,5 +58,11 @@ require("nvim-tree").setup({
   view = {
     width = 30,
     side = "left",
+    preserve_window_proportions = true, -- Don't resize other windows when opening/closing
+  },
+  actions = {
+    open_file = {
+      resize_window = false, -- Don't resize tree window when opening files
+    },
   },
 })
