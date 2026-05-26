@@ -119,6 +119,7 @@ require("lazy").setup({
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-vsnip",
+      "roobert/tailwindcss-colorizer-cmp.nvim",
       "hrsh7th/vim-vsnip",
       "onsails/lspkind-nvim",
     },

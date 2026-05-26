@@ -36,6 +36,10 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- Vue Language Server path (installed globally via pnpm)
+-- NOTE: Update version number when upgrading @vue/language-server
+local vue_language_server_path = '/home/corey/.local/share/pnpm/global/5/.pnpm/@vue+language-server@3.3.2_typescript@6.0.3/node_modules/@vue/language-server'
+
 -- Configure LSP servers using new vim.lsp.config API
 vim.lsp.config('pyright', {
   on_attach = on_attach,
@@ -47,6 +51,7 @@ vim.lsp.config('eslint', {
   capabilities = capabilities,
 })
 
+-- TypeScript server with Vue plugin support
 vim.lsp.config('ts_ls', {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -55,7 +60,7 @@ vim.lsp.config('ts_ls', {
     plugins = {
       {
         name = '@vue/typescript-plugin',
-        location = vim.fn.stdpath('data') .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+        location = vue_language_server_path,
         languages = { 'vue' }
       }
     }
@@ -67,18 +72,18 @@ vim.lsp.config('jsonls', {
   capabilities = capabilities,
 })
 
+-- Vue Language Server (handles template/CSS in .vue files)
 vim.lsp.config('vue_ls', {
   on_attach = on_attach,
   capabilities = capabilities,
 })
 
--- Setup custom tabby-agent language server
-vim.lsp.config('tabby', {
-  cmd = { "tabby-agent", "--stdio" },
-  filetypes = { "python", "javascript", "typescript", "lua", "go", "rust", "html", "css" },
+-- Tailwind CSS Language Server (provides class name completions and hover info)
+vim.lsp.config('tailwindcss', {
   on_attach = on_attach,
   capabilities = capabilities,
+  filetypes = { 'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' },
 })
 
 -- Enable all configured servers
-vim.lsp.enable({ 'pyright', 'eslint', 'ts_ls', 'jsonls', 'vue_ls', 'tabby' })
+vim.lsp.enable({ 'pyright', 'eslint', 'ts_ls', 'jsonls', 'vue_ls', 'tailwindcss' })
