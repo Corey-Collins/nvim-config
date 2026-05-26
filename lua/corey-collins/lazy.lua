@@ -82,19 +82,30 @@ require("lazy").setup({
   },
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    lazy = false,
     config = function()
-      require('nvim-autopairs').setup({
-        check_ts = true, -- Enable Treesitter integration
+      local npairs = require('nvim-autopairs')
+      npairs.setup({
+        check_ts = true,
+        ts_config = {
+          lua = { 'string' },
+          javascript = { 'template_string' },
+          vue = { 'template_string' },
+        },
       })
     end,
   },
   {
     "windwp/nvim-ts-autotag",
-    ft = { "html", "xml", "javascriptreact", "typescriptreact", "vue", "javascript", "typescript" },
+    lazy = false,
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
       require('nvim-ts-autotag').setup({
-        filetypes = { "html", "xml", "javascriptreact", "typescriptreact", "vue", "javascript", "typescript" },
+        opts = {
+          enable_close = true,
+          enable_rename = true,
+          enable_close_on_slash = false,
+        },
       })
     end,
   },

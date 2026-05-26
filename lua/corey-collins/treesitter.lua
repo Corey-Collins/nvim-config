@@ -13,6 +13,7 @@ configs.setup({
 	autopairs = {
 		enable = true,
 	},
+	-- autotag is now configured separately, not through treesitter
 	-- indent = { enable = true, disable = { "python", "css" } },
 	indent = { enable = true },
     context_commentstring = {
